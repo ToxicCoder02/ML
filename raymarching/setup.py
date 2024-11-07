@@ -4,17 +4,22 @@ from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 _src_path = os.path.dirname(os.path.abspath(__file__))
 
+os.environ['TORCH_CUDA_ARCH_LIST'] = '7.5'
+
 nvcc_flags = [
-    '-O3', '-std=c++14',
+    '-O3', '-std=c++17',  # Change from c++14 to c++17
     '-U__CUDA_NO_HALF_OPERATORS__', '-U__CUDA_NO_HALF_CONVERSIONS__', '-U__CUDA_NO_HALF2_OPERATORS__',
+    '-allow-unsupported-compiler'  # Keep the unsupported compiler flag if needed
 ]
 
-if os.name == "posix":
-    c_flags = ['-O3', '-std=c++14']
-elif os.name == "nt":
-    c_flags = ['/O2', '/std:c++17']
 
-    # find cl.exe
+if os.name == "posix":
+    c_flags = ['-O3', '-std=c++17']  # Change from c++14 to c++17 if needed for POSIX
+elif os.name == "nt":
+    c_flags = ['/O2', '/std:c++17']  # Set to c++17 for Windows
+
+
+    # Function to find the path to cl.exe (Visual Studio compiler)
     def find_cl_path():
         import glob
         for edition in ["Enterprise", "Professional", "BuildTools", "Community"]:
@@ -22,7 +27,7 @@ elif os.name == "nt":
             if paths:
                 return paths[0]
 
-    # If cl.exe is not on path, try to find it.
+    # If cl.exe is not in PATH, add it manually
     if os.system("where cl.exe >nul 2>nul") != 0:
         cl_path = find_cl_path()
         if cl_path is None:
@@ -32,20 +37,18 @@ elif os.name == "nt":
 '''
 Usage:
 
-python setup.py build_ext --inplace # build extensions locally, do not install (only can be used from the parent directory)
-
-python setup.py install # build extensions and install (copy) to PATH.
-pip install . # ditto but better (e.g., dependency & metadata handling)
-
-python setup.py develop # build extensions and install (symbolic) to PATH.
-pip install -e . # ditto but better (e.g., dependency & metadata handling)
-
+python setup.py build_ext --inplace # Build extensions locally, do not install (only usable from the parent directory)
+python setup.py install # Build extensions and install (copy) to PATH
+pip install . # Preferred alternative, handles dependency & metadata
+python setup.py develop # Build extensions and install (symbolic) to PATH
+pip install -e . # Preferred alternative, handles dependency & metadata
 '''
+
 setup(
-    name='raymarching', # package name, import this to use python API
+    name='raymarching',  # Package name, import this to use Python API
     ext_modules=[
         CUDAExtension(
-            name='_raymarching', # extension name, import this to use CUDA API
+            name='_raymarching',  # Extension name, import this to use CUDA API
             sources=[os.path.join(_src_path, 'src', f) for f in [
                 'raymarching.cu',
                 'bindings.cpp',
