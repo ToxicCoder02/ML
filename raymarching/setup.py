@@ -1,54 +1,46 @@
 import os
 from setuptools import setup
 from torch.utils.cpp_extension import BuildExtension, CUDAExtension
+import torch
 
 _src_path = os.path.dirname(os.path.abspath(__file__))
 
+# Get the CUDA version that PyTorch was compiled with
+torch_cuda_version = torch.version.cuda
+print(f"PyTorch was compiled with CUDA version: {torch_cuda_version}")
+
+# Set the CUDA_HOME based on the PyTorch version
+if torch_cuda_version.startswith("11.8"):
+    os.environ['CUDA_HOME'] = r'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8'
+elif torch_cuda_version.startswith("12.6"):
+    os.environ['CUDA_HOME'] = r'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.6'
+else:
+    raise RuntimeError(f"Unsupported CUDA version: {torch_cuda_version}. Please install a compatible CUDA version.")
+
+# Verify CUDA_HOME
+print(f"Using CUDA_HOME: {os.environ['CUDA_HOME']}")
+
+# Set the CUDA architecture for your GPU
 os.environ['TORCH_CUDA_ARCH_LIST'] = '7.5'
 
+# NVCC (CUDA Compiler) Flags
 nvcc_flags = [
-    '-O3', '-std=c++17',  # Change from c++14 to c++17
-    '-U__CUDA_NO_HALF_OPERATORS__', '-U__CUDA_NO_HALF_CONVERSIONS__', '-U__CUDA_NO_HALF2_OPERATORS__',
-    '-allow-unsupported-compiler'  # Keep the unsupported compiler flag if needed
+    '-O3', '-std=c++17',
+    '-U__CUDA_NO_HALF_OPERATORS__',
+    '-U__CUDA_NO_HALF_CONVERSIONS__',
+    '-U__CUDA_NO_HALF2_OPERATORS__',
+    '--expt-relaxed-constexpr',
+    '-allow-unsupported-compiler'
 ]
 
-
-if os.name == "posix":
-    c_flags = ['-O3', '-std=c++17']  # Change from c++14 to c++17 if needed for POSIX
-elif os.name == "nt":
-    c_flags = ['/O2', '/std:c++17']  # Set to c++17 for Windows
-
-
-    # Function to find the path to cl.exe (Visual Studio compiler)
-    def find_cl_path():
-        import glob
-        for edition in ["Enterprise", "Professional", "BuildTools", "Community"]:
-            paths = sorted(glob.glob(r"C:\\Program Files (x86)\\Microsoft Visual Studio\\*\\%s\\VC\\Tools\\MSVC\\*\\bin\\Hostx64\\x64" % edition), reverse=True)
-            if paths:
-                return paths[0]
-
-    # If cl.exe is not in PATH, add it manually
-    if os.system("where cl.exe >nul 2>nul") != 0:
-        cl_path = find_cl_path()
-        if cl_path is None:
-            raise RuntimeError("Could not locate a supported Microsoft Visual C++ installation")
-        os.environ["PATH"] += ";" + cl_path
-
-'''
-Usage:
-
-python setup.py build_ext --inplace # Build extensions locally, do not install (only usable from the parent directory)
-python setup.py install # Build extensions and install (copy) to PATH
-pip install . # Preferred alternative, handles dependency & metadata
-python setup.py develop # Build extensions and install (symbolic) to PATH
-pip install -e . # Preferred alternative, handles dependency & metadata
-'''
+# Compiler flags based on operating system
+c_flags = ['/O2', '/std:c++17']
 
 setup(
-    name='raymarching',  # Package name, import this to use Python API
+    name='raymarching',
     ext_modules=[
         CUDAExtension(
-            name='_raymarching',  # Extension name, import this to use CUDA API
+            name='_raymarching',
             sources=[os.path.join(_src_path, 'src', f) for f in [
                 'raymarching.cu',
                 'bindings.cpp',

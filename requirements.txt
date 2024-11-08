@@ -1,10 +1,12 @@
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
 torch-ema
 ninja
 trimesh
-opencv-python
+opencv-python-headless
 tensorboardX
-torch
-numpy 
+numpy
 pandas
 tqdm
 matplotlib
