@@ -39,6 +39,7 @@ if __name__ == '__main__':
     )
     os.makedirs(opt.workspace, exist_ok=True)
     shutil.copy(args.config, os.path.join(opt.workspace, os.path.basename(args.config)))
+    opt.workspace = f"logs/{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/{opt.text.replace(' ', '_')}"
 
     print('Double Check data path:')
     print(opt.mask_path)
@@ -89,12 +90,18 @@ if __name__ == '__main__':
 
         scheduler = lambda optimizer: torch.optim.lr_scheduler.LambdaLR(optimizer, lambda iter: 1)  # fixed
 
+<<<<<<< HEAD
         trainer = Trainer(
             'lift', opt, model, guidance, device=device, 
             workspace=opt.workspace, optimizer=optimizer, ema_decay=None, 
             fp16=opt.fp16, lr_scheduler=scheduler, use_checkpoint=opt.ckpt, 
             eval_interval=opt.eval_interval, scheduler_update_every_step=True
         )
+=======
+        scheduler = lambda optimizer: optim.lr_scheduler.LambdaLR(optimizer, lambda iter: 1) # fixed
+        # scheduler = lambda optimizer: optim.lr_scheduler.LambdaLR(optimizer, lambda iter: 0.1 ** min(iter / opt.iters, 1))
+        opt.workspace = f"logs/{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}/{opt.text.replace(' ', '_')}"
+>>>>>>> repoB/main
 
         valid_loader = NeRFDataset(opt, device=device, type='val', H=opt.H, W=opt.W, size=5).dataloader()
         opt.max_epoch = int(np.ceil(opt.iters / len(train_loader)))

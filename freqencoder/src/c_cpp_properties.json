@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.6/include",
+                "C:/Users/your_username/Anaconda3/envs/neurallift360/Lib/site-packages/torch/include",
+                "C:/Users/your_username/Anaconda3/envs/neurallift360/Lib/site-packages/torch/include/torch/csrc/api/include",
+                "C:/Users/your_username/Anaconda3/envs/neurallift360/Lib/site-packages/torch/include/TH",
+                "C:/Users/your_username/Anaconda3/envs/neurallift360/Lib/site-packages/torch/include/THC"
+            ],
+            "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+            "compilerPath": "C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.41.34120/bin/Hostx64/x64/cl.exe",
+            "intelliSenseMode": "msvc-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "C:/Users/your_username/Anaconda3/envs/neurallift360/Lib/site-packages/torch/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}

@@ -66,7 +66,11 @@ def custom_meshgrid(*args):
 def safe_normalize(x, eps=1e-20):
     return x / torch.sqrt(torch.clamp(torch.sum(x * x, -1, keepdim=True), min=eps))
 
+<<<<<<< HEAD
 @torch.amp.autocast(device_type='cuda', enabled=False)
+=======
+@torch.amp.autocast("cuda", enabled=False)
+>>>>>>> repoB/main
 def get_rays(poses, intrinsics, H, W, N=-1, error_map=None):
     ''' get rays
     Args:

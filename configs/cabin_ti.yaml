@@ -1,90 +1,88 @@
-# prompt
-text: 'A large <cabin> on top of a sunny mountain in the style of Dreamworks, artstation' # text prompt
-negative: '' # negative text prompt
+# Prompt
+text: 'A large <cabin> on top of a sunny mountain in the style of Dreamworks, artstation'  # text prompt
+negative: ''  # negative text prompt
 
-# training
-test: False # test mode
-save_mesh: False # export an obj mesh with texture
-eval_interval: 200 # evaluate on the valid set every interval epochs
-seed: 12 # random seed
-iters: 10000 # training iters
-lr:  1.0e-3 # initial learning rate
-ckpt: 'latest'
-fp16:  True # use amp mixed precision training
-backbone: 'grid_finite' # nerf backbone
+# Training Settings
+test: False  # test mode
+save_mesh: False  # export an OBJ mesh with texture
+eval_interval: 200  # evaluate on the valid set every interval epochs
+seed: 12  # random seed for reproducibility
+iters: 10000  # number of training iterations
+lr: 1.0e-3  # initial learning rate
+ckpt: 'latest'  # checkpoint to start training from
+fp16: True  # use mixed precision (fp16) for training to save memory
+backbone: 'grid_finite'  # NeRF backbone type (grid-based)
 
-# ngp
-cuda_ray:  False # use CUDA raymarching instead of pytorch, not supported
-max_steps: 1024 # max num steps sampled per ray (only valid when using --cuda_ray)
-num_steps: 64 # num steps sampled per ray (only valid when not using --cuda_ray)
-upsample_steps: 64 # num steps up-sampled per ray (only valid when not using --cuda_ray)
-update_extra_interval: 16 # iter interval to update extra status (only valid when using --cuda_ray)
-max_ray_batch: 4096 # batch size of rays at inference to avoid OOM (only valid when not using --cuda_ray)
-albedo_iters: 400 # training iters that only use albedo shading
-bg_radius:  1.4 # if positive, use a background model at sphere(bg_radius)
-density_activation: 'exp' # density activation function
-density_thresh:  0.1 # threshold for density grid to be occupied
-lambda_tv: 0 # loss scale for total variation
-p_albedo: 0.25 # prob of iterations using albedo to train
-p_textureless: 0.5 # prob of iterations using textureless rendering is p_textureless * (1 - p_albedo)
-p_randbg: 0.75 # prob of iterations using random background
+# NGP (Neural Graphics Primitives)
+cuda_ray: False  # use CUDA raymarching (not supported here)
+max_steps: 1024  # max steps per ray (only used if cuda_ray is True)
+num_steps: 64  # number of steps per ray (when not using cuda_ray)
+upsample_steps: 64  # number of upsampled steps per ray
+update_extra_interval: 16  # update extra status interval (when using cuda_ray)
+max_ray_batch: 4096  # batch size for rays during inference to prevent OOM errors
+albedo_iters: 400  # iterations using only albedo shading
+bg_radius: 1.4  # background model sphere radius
+density_activation: 'exp'  # activation function for density
+density_thresh: 0.1  # threshold for density grid
+lambda_tv: 0  # total variation loss scaling
+p_albedo: 0.25  # probability of using albedo for training
+p_textureless: 0.5  # probability of textureless rendering
+p_randbg: 0.75  # probability of using random backgrounds
 
-# residual blob
-blob_density:  5 # max (center) density for the density blob
-blob_radius:  0.2 # control the radius for the density blob
+# Residual Blob Settings
+blob_density: 5  # maximum density for the density blob
+blob_radius: 0.2  # radius for the density blob
 
+# Camera Settings
+w: 128  # training render width
+h: 128  # training render height
+normal_shape: 100  # render height for normals
+jitter_pose: True  # add jitter to sampled camera poses
+bound: 1  # scene boundary box
+dt_gamma: 0  # adaptive ray marching (set to 0 to disable)
+min_near: 0.1  # minimum near distance for camera
+radius_range: [0.4, 1.0]  # camera radius range during training
+fovy_range: [40, 70]  # camera field of view range during training
 
-# camera
-w: 128 # render width for NeRF in training
-h: 128 # render height for NeRF in training
-normal_shape: 100 # render height for normal
-jitter_pose: True # add jitters to the randomly sampled camera poses
-bound:  1 # assume the scene is bounded in box(-bound, bound)
-dt_gamma:  0 # dt_gamma (>=0) for adaptive ray marching. set to 0 to disable, >0 to accelerate rendering (but usually with worse quality)
-min_near:  0.1 # minimum near distance for camera
-radius_range: [0.4, 1.0] # training camera radius range
-fovy_range:  [40, 70] # training camera fovy range
+# Directional Text Encoding
+dir_text: True  # encode text with direction (front, side, back, etc.)
+negative_dir_text: False  # use negative directional text
+angle_overhead: 30  # overhead angle range
+angle_front: 60  # front angle range
 
-# dir text
-dir_text:  True # direction-encode the text prompt, by appending front/side/back/overhead view
-negative_dir_text:  False # also use negative dir text prompt.
-angle_overhead:  30 # [0, angle_overhead] is the overhead region
-angle_front:  60 # [180 - front, 180 + front] 0 (front) is the front region, [0, front], [360 - front, 360] 2 (back)
-# loss function
-lambda_entropy: 0 # loss scale for alpha entropy
-lambda_opacity:  1.0e-3 # loss scale for alpha value
-lambda_orient:  10 # loss scale for orientation
-lambda_smooth:  0 # loss scale for orientation
-lambda_blur:  0 # loss scale for orientation
-distortion: 0.1 # distortion loss in mipnerf360
+# Loss Function Settings
+lambda_entropy: 0  # scale for alpha entropy loss
+lambda_opacity: 1.0e-3  # scale for opacity loss
+lambda_orient: 10  # scale for orientation loss
+lambda_smooth: 0  # scale for smoothness loss
+lambda_blur: 0  # scale for blur loss
+distortion: 0.1  # distortion loss for MipNeRF360
 
-# test time
-gui:  False # start a GUI
-W: 800 # test width
-H: 800 # test height
-fovy:  60 # default GUI camera fovy
+# Test-time Rendering Settings
+gui: False  # enable GUI for testing
+W: 800  # test render width
+H: 800  # test render height
+fovy: 60  # field of view for the test camera
 
+# Reference View Settings
+mask_path: 'data/cabin4_centered_mask.png'  # path to mask
+depth_path: 'data/cabin4_centered.npy'  # path to depth map
+rgb_path: 'data/cabin4_centered.png'  # path to RGB image
+warmup_epoch: 1  # number of epochs for warmup
+init_theta: 90  # initial theta for camera pose
+init_radius: 0.4  # initial radius for camera
+front_fov: 60  # field of view for the front view
+clip_img_weight: 1  # weight for CLIP image loss
+front_ratio: 0.02  # ratio for reference views during training
+front_dist_amplify: 10  # amplification factor for distance
+front_dsmooth_amplify: 5  # amplification factor for depth smoothness
+ref_perturb_prob: 0.05  # probability of reference perturbation
+ref_rgb_weight: 40  # weight for reference RGB loss
 
-# reference view
-mask_path: 'data/cabin4_centered_mask.png'  # mask path
-depth_path: 'data/cabin4_centered.npy' # depth map path
-rgb_path: 'data/cabin4_centered.png' # rgb path
-warmup_epoch: 1
-init_theta: 90
-init_radius: 0.4
-front_fov:  60 #
-clip_img_weight: 1 # CLIP image loss
-front_ratio:  0.02 # ratio of reference view during training
-front_dist_amplify: 10
-front_dsmooth_amplify: 5
-ref_perturb_prob: 0.05
-ref_rgb_weight: 40
-
-# diffusion model
-guidance:  sd_clipguide
-min_sd: 50 # timestep range
-max_sd: 950 # timestep range
-eta:  0.8 # prompt classifier-free guidance
-dataset: text2img
-sd_name: cabin_ti
-# sd_name: runwayml/stable-diffusion-v1-5
+# Diffusion Model Settings
+guidance: sd_clipguide  # guidance method using Stable Diffusion + CLIP
+min_sd: 50  # minimum timestep for diffusion model
+max_sd: 950  # maximum timestep for diffusion model
+eta: 0.8  # classifier-free guidance scale
+dataset: text2img  # dataset type
+sd_name: runwayml/stable-diffusion-v1-5  # pre-trained Stable Diffusion model

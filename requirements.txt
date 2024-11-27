@@ -6,7 +6,12 @@ ninja
 trimesh
 opencv-python-headless
 tensorboardX
+<<<<<<< HEAD
 numpy
+=======
+torch
+numpy>=1.21.0,<=1.24.0
+>>>>>>> repoB/main
 pandas
 tqdm
 matplotlib

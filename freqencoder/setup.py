@@ -4,6 +4,35 @@ from torch.utils.cpp_extension import BuildExtension, CUDAExtension
 
 _src_path = os.path.dirname(os.path.abspath(__file__))
 
+from setuptools import setup
+from torch.utils.cpp_extension import BuildExtension, CUDAExtension
+
+setup(
+    name='freqencoder',
+    ext_modules=[
+        CUDAExtension(
+            name='freqencoder',
+            sources=['src/freqencoder.cu', 'src/bindings.cpp'],
+            extra_compile_args={
+                'cxx': ['/std:c++17'],
+                'nvcc': [
+                    '--expt-relaxed-constexpr',
+                    '-std=c++17',
+                    '-O3',
+                    '-U__CUDA_NO_HALF_OPERATORS__',
+                    '-U__CUDA_NO_HALF_CONVERSIONS__',
+                    '-U__CUDA_NO_HALF2_OPERATORS__'
+                ]
+            }
+        ),
+    ],
+    cmdclass={
+        'build_ext': BuildExtension
+    }
+)
+
+
+
 nvcc_flags = [
     '-O3', '-std=c++14',
     '-U__CUDA_NO_HALF_OPERATORS__', '-U__CUDA_NO_HALF_CONVERSIONS__', '-U__CUDA_NO_HALF2_OPERATORS__',
@@ -39,10 +68,20 @@ setup(
                 'freqencoder.cu',
                 'bindings.cpp',
             ]],
-            extra_compile_args={
-                'cxx': c_flags,
-                'nvcc': nvcc_flags,
-            }
+            extra_compile_args = {
+            'cxx': ['/std:c++17'],  # For MSVC
+            'nvcc': [
+                '--expt-relaxed-constexpr',
+                '-std=c++17',
+                '-O3',
+                '-U__CUDA_NO_HALF_OPERATORS__',
+                '-U__CUDA_NO_HALF_CONVERSIONS__',
+                '-U__CUDA_NO_HALF2_OPERATORS__',
+                '--use_fast_math',
+                '-allow-unsupported-compiler'
+            ]
+        }       
+
         ),
     ],
     cmdclass={
