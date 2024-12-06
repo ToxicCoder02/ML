@@ -42,8 +42,8 @@ This repository extends the original implementation with significant optimizatio
 
 | Name              | GitHub Username                                | Contribution                                                                                   |
 |-------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **Rohan Sharma**  | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Compatibility Testing, Hyperparameter Tuning, Code Optimization for Colab, and Result Validation. |
-| **Shailesh Chaudhary** | [@Sschaudhary6](#)                            | Documentation, Batch Testing.                                                                 |
+| **Rohan Sharma**  | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Compatibility Testing, Hyperparameter Tuning, Code Optimization for Colab,Hypothesis Testing, and Result Validation. |
+| **Shailesh Chaudhary** | [@Sschaudhary6](#)                            | Documentation, PPT Making, Initial Code testing Batch Testing.                                                                 |
 
 To verify individual contributions, refer to the `git log` in the repository.
 
