@@ -113,9 +113,9 @@ pip install -r requirements.txt
 #### **Comparative Outputs with Resolutions**
 | Training Resolution | RGB Output                                      | Depth Output                                      |
 |----------------------|------------------------------------------------|--------------------------------------------------|
-| 32×32               | <video src="/images/lift_ep0010_rgb (2)_32.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_32.mp4" controls width="300"></video> |
-| 128×128             | <video src="/images/lift_ep0010_rgb (2)_128.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_128.mp4" controls width="300"></video> |
-| 256×256             | <video src="/images/lift_ep0010_rgb (2)_256.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_256.mp4" controls width="300"></video> |
+| 32×32               | [RGB Output (32×32)](/images/lift_ep0010_rgb_(2)_32.mp4) | [Depth Output (32×32)](/images/lift_ep0010_depth_(2)_32.mp4) |
+| 128×128             | [RGB Output (128×128)](/images/lift_ep0010_rgb_(2)_128.mp4) | [Depth Output (128×128)](/images/lift_ep0010_depth_(2)_128.mp4) |
+| 256×256             | [RGB Output (256×256)](/images/lift_ep0010_rgb_(2)_256.mp4) | [Depth Output (256×256)](/images/lift_ep0010_depth_(2)_256.mp4) |
 
 #### **Single Image to RGB 360° View**
 - Input Image:
