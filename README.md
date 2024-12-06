@@ -167,10 +167,10 @@ These links will allow users to download or play the videos directly (if support
   <img src="data/cabin4_centered.png" alt="Input Image Example" width="300">
 
 - Reconstructed RGB 360° View:
-  <video src="/images/lift_ep0010_rgb.mp4" controls width="600"></video>
+  [RGB Output (2048×2048)](images/lift_ep0020_rgb.mp4)
 
 - Depth 360° View:
-  <video src="/images/lift_ep0010_depth.mp4" controls width="600"></video>
+  [Depth Output (2048×2048)](images/lift_ep0020_depth.mp4)
 
 ---
 
