@@ -15,7 +15,7 @@ max_steps: 256 # reduced max num steps sampled per ray
 num_steps: 16 # reduced num steps sampled per ray
 upsample_steps: 16 # reduced num steps up-sampled per ray
 update_extra_interval: 16 # iter interval to update extra status (only valid when using --cuda_ray)
-max_ray_batch: 512 # reduced batch size of rays at inference to avoid OOM
+max_ray_batch: 32 # reduced batch size of rays at inference to avoid OOM
 albedo_iters: 100 # reduced training iters that only use albedo shading
 bg_radius:  1.4 # if positive, use a background model at sphere(bg_radius)
 density_activation: 'exp' # density activation function
