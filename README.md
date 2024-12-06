@@ -39,8 +39,14 @@ Our contributions also include a detailed analysis of performance trade-offs, en
 
 ---
 
-## **Team Members and Contributions**| Name                 | GitHub Username              | Contribution                                    ||----------------------|------------------------------|------------------------------------------------|| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Comapatibliliy Testing ,Hyperparameter tuning, code optimization for Colab, and result validation. || **Sgailesh Chaudhary**    | [@Sschaudhary6](#)              | Documentation,Batch Tesing |To verify individual contributions, refer to the `git log` in the repository
+## **Team Members and Contributions**
 
+| Name              | GitHub Username                                | Contribution                                                                                   |
+|-------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Rohan Patil**  | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Compatibility Testing, Hyperparameter Tuning, Code Optimization for Colab, and Result Validation. |
+| **Shailesh Chaudhary** | [@Sschaudhary6](#)                            | Documentation, Batch Testing.                                                                 |
+
+To verify individual contributions, refer to the `git log` in the repository.
 ---
 
 ## **Methodology**
