@@ -164,7 +164,7 @@ These additional tables provide insights into how batch size and resolution infl
 These links will allow users to download or play the videos directly (if supported by the platform). Let me know if you'd like additional formatting or other video-specific details added!
 #### **Single Image to RGB 360° View**
 - Input Image:
-  <img src="/images/input_image.jpg" alt="Input Image Example" width="300">
+  <img src="data/cabin4_centered.png" alt="Input Image Example" width="300">
 
 - Reconstructed RGB 360° View:
   <video src="/images/lift_ep0010_rgb.mp4" controls width="600"></video>
@@ -181,7 +181,7 @@ Here are some pre-configured notebooks for quick experimentation:
 2. [Advanced Reconstruction](https://colab.research.google.com/drive/1qE2Dwwxs7RbZmfuufZqfe_NyfRP_ri4P)
 3. [Boostmonoculardepth_npy](https://colab.research.google.com/drive/15YCsqaO6l94HueVwPQgHqVVDUJzdOEO5)
 4. [stable-dreamfusion](https://colab.research.google.com/drive/1ncs4m7Of2ltE-EpwqBiCZzbYUp1V2yNL)
-*Note:- All huper parameter tuning was done by just changing the parameneters in Cabin.yaml dynamically and was re-ran after each and all results are available in /images for refernce
+-*Note:- All huper parameter tuning was done by just changing the parameneters in Cabin.yaml dynamically and was re-ran after each and all results are available in /images for refernce
 
 ---
 
