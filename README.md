@@ -1,3 +1,6 @@
+Here’s an updated version of the README with the workflow shown separately, ensuring clarity and better visibility:
+
+---
 
 # **NeuralLift-360: Single-Image 3D Reconstruction**
 
@@ -9,7 +12,7 @@
 1. [Introduction](#introduction)
 2. [Core Features](#core-features)
 3. [Team Members and Contributions](#team-members-and-contributions)
-4. [Methodology](#methodology)
+4. [Workflow](#workflow)
 5. [Installation](#installation)
 6. [Usage Guide](#usage-guide)
 7. [Experimental Results](#experimental-results)
@@ -49,16 +52,11 @@ To verify contributions, refer to the `git log` in the repository.
 
 ---
 
-## **Methodology**
+## **Workflow**
 
-1. **Forked Base Code**: 
-   - Original Repository: [VITA-Group/NeuralLift-360](https://github.com/VITA-Group/NeuralLift-360)
-   - Fork: [ToxicCoder02/ML-Project](https://github.com/ToxicCoder02/ML-Project)
+The following diagram illustrates the complete pipeline for generating 3D reconstructions from a single 2D image using NeuralLift-360:
 
-2. **Enhancements**:
-   - Optimized batch size, resolution, and CLIP weights for constrained hardware.
-   - Integrated VRAM usage monitoring to prevent overflows.
-   - Fine-tuned depth and diffusion parameters for better textures and geometry.
+![Workflow Diagram](images/Workflow.png)
 
 ---
 
@@ -110,29 +108,7 @@ pip install -r requirements.txt
 
 ## **Visual Outputs**
 
-### **Graphs**
-#### Training Loss vs. Batch Size
-<img src="/images/graph-1.png" alt="Training Loss vs Batch Size" width="600">
-
-#### GPU Usage vs. Training Resolution
-<img src="/images/graph-2.png" alt="GPU Usage vs Training Resolution" width="600">
-
-#### CLIP Weight vs. Output Quality
-<img src="/images/graph-3.png" alt="CLIP Weight vs Output Quality" width="600">
-
----
-
 ### **Reconstructed 3D Outputs**
-
-#### **Example: Single Image to RGB 360° View**
-- Input Image:
-  <img src="/images/Workflow.png" alt="Input Image Example" width="300">
-
-- Reconstructed RGB 360° View:
-  <video src="/images/lift_ep0010_rgb.mp4" controls width="600"></video>
-
-- Depth 360° View:
-  <video src="/images/lift_ep0010_depth.mp4" controls width="600"></video>
 
 #### **Comparative Outputs with Resolutions**
 | Training Resolution | RGB Output                                      | Depth Output                                      |
@@ -140,6 +116,16 @@ pip install -r requirements.txt
 | 32×32               | <video src="/images/lift_ep0010_rgb (2)_32.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_32.mp4" controls width="300"></video> |
 | 128×128             | <video src="/images/lift_ep0010_rgb (2)_128.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_128.mp4" controls width="300"></video> |
 | 256×256             | <video src="/images/lift_ep0010_rgb (2)_256.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_256.mp4" controls width="300"></video> |
+
+#### **Single Image to RGB 360° View**
+- Input Image:
+  <img src="/images/input_image.jpg" alt="Input Image Example" width="300">
+
+- Reconstructed RGB 360° View:
+  <video src="/images/lift_ep0010_rgb.mp4" controls width="600"></video>
+
+- Depth 360° View:
+  <video src="/images/lift_ep0010_depth.mp4" controls width="600"></video>
 
 ---
 
@@ -167,3 +153,5 @@ Here are some pre-configured notebooks for quick experimentation:
 4. [NVIDIA T4 GPU Architecture](https://www.nvidia.com/en-us/data-center/tesla-t4/)
 
 ---
+
+This README separates the workflow into its own section and maintains clarity by emphasizing key outputs and configurations with better organization.
