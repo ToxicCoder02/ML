@@ -103,6 +103,26 @@ To view the original code, visit [NeuralLift-360 by VITA-Group](https://github.c
 
 ---
 
+### **Batch Size: Observations and Analysis**
+
+| Batch Size | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+|------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
+| 128        | ~8 GB           | ~18 minutes   | 0.2289     | Moderate texture clarity; geometry slightly inconsistent.                                        |
+| **256**    | **~11 GB**      | **~20 minutes** | **0.2113** | **Sharp textures**; stable geometry with minimal artifacts.                                      |
+| 512        | ~14 GB          | ~24 minutes   | 0.2034     | Slight overfitting observed; geometry became overly detailed.                                    |
+
+---
+
+### **Resolution: Observations and Analysis**
+
+| Resolution  | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+|-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
+| 64×64       | ~6 GB           | ~15 minutes   | 0.2634     | Low-resolution outputs; textures were blurry, geometry was overly simplified.                   |
+| **128×128** | **~11 GB**      | **~20 minutes** | **0.2113** | **Balanced quality**: Textures were sharp, geometry was consistent.                             |
+| 256×256     | ~18 GB          | ~35 minutes   | 0.1987     | Excellent texture clarity but required significantly more resources and time.                   |
+
+---
+
 ### **Optimized Hyperparameters**
 
 #### 1. Optimized Hyperparameter Configuration:
