@@ -108,15 +108,19 @@ pip install -r requirements.txt
 
 ## **Visual Outputs**
 
-### **Reconstructed 3D Outputs**
+### **Comparative Outputs with Resolutions**
 
-#### **Comparative Outputs with Resolutions**
 | Training Resolution | RGB Output                                      | Depth Output                                      |
 |----------------------|------------------------------------------------|--------------------------------------------------|
-| 32×32               | [RGB Output (32×32)](/images/lift_ep0010_rgb_(2)_32.mp4) | [Depth Output (32×32)](/images/lift_ep0010_depth_(2)_32.mp4) |
-| 128×128             | [RGB Output (128×128)](/images/lift_ep0010_rgb_(2)_128.mp4) | [Depth Output (128×128)](/images/lift_ep0010_depth_(2)_128.mp4) |
-| 256×256             | [RGB Output (256×256)](/images/lift_ep0010_rgb_(2)_256.mp4) | [Depth Output (256×256)](/images/lift_ep0010_depth_(2)_256.mp4) |
+| 32×32               | [RGB Output (32×32)](/images/lift_ep0010_rgb%20(2)_32.mp4) | [Depth Output (32×32)](/images/lift_ep0010_depth%20(2)_32.mp4) |
+| 128×128             | [RGB Output (128×128)](/images/lift_ep0010_rgb%20(2)_128.mp4) | [Depth Output (128×128)](/images/lift_ep0010_depth%20(2)_128.mp4) |
+| 256×256             | [RGB Output (256×256)](/images/lift_ep0010_rgb%20(2)_256.mp4) | [Depth Output (256×256)](/images/lift_ep0010_depth%20(2)_256.mp4) |
+| 512×512             | [RGB Output (512×512)](/images/lift_ep0010_rgb%20(1)_512.mp4) | [Depth Output (512×512)](/images/lift_ep0010_depth%20(1)_512.mp4) |
+| 2048×2048           | [RGB Output (2048×2048)](/images/lift_ep0010_rgb%20(1)_2048.mp4) | [Depth Output (2048×2048)](/images/lift_ep0010_depth%20(1)_2048.mp4) |
 
+---
+
+These links will allow users to download or play the videos directly (if supported by the platform). Let me know if you'd like additional formatting or other video-specific details added!
 #### **Single Image to RGB 360° View**
 - Input Image:
   <img src="/images/input_image.jpg" alt="Input Image Example" width="300">
