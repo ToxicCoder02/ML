@@ -39,14 +39,7 @@ Our contributions also include a detailed analysis of performance trade-offs, en
 
 ---
 
-## **Team Members and Contributions**
-
-| Name                 | GitHub Username              | Contribution                                    |
-|----------------------|------------------------------|------------------------------------------------|
-| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Comapatibliliy Testing ,Hyperparameter tuning, code optimization for Colab, and result validation. |
-| **Sgailesh Chaudhary**    | [@Sschaudhary6](#)              | Documentation,Batch Tesing |
-
-To verify individual contributions, refer to the `git log` in the repository.
+## **Team Members and Contributions**| Name                 | GitHub Username              | Contribution                                    ||----------------------|------------------------------|------------------------------------------------|| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Comapatibliliy Testing ,Hyperparameter tuning, code optimization for Colab, and result validation. || **Sgailesh Chaudhary**    | [@Sschaudhary6](#)              | Documentation,Batch Tesing |To verify individual contributions, refer to the `git log` in the repository
 
 ---
 
@@ -94,38 +87,37 @@ To view the original code, visit [NeuralLift-360 by VITA-Group](https://github.c
 
 ## **Experimental Results**
 
-### **Reconstruction Outputs**
-#### Input Image
-<img src="images/input_image.jpg" alt="Input Image" width="300">
+### **CLIP Weight: Observations and Analysis**
 
-#### Reconstructed RGB 360° View
-<img src="images/rgb_360.gif" alt="RGB 360° View" width="500">
-
-#### Reconstructed Depth 360° View
-<img src="images/depth_360.gif" alt="Depth 360° View" width="500">
+| CLIP Weight | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+|-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
+| 1           | ~9 GB           | ~20 minutes   | 0.2543     | Poor alignment: Textures lacked clarity, geometry was overly simplified, and output diverged.    |
+| **10**      | **~11 GB**      | **~22 minutes** | **0.2113** | **Balanced alignment**: Textures were sharper, geometry was stable, closely resembling input.    |
+| 20          | ~13 GB          | ~22.5 minutes | 0.2198     | Over-sharpening: Textures became overly detailed, leading to artifacts, and geometry inconsistencies. |
 
 ---
 
-### **Training Efficiency**
-#### GPU VRAM Usage vs. Resolution
-| Training Resolution | VRAM Usage | Output Quality                  |
-|----------------------|------------|----------------------------------|
-| 32×32               | ~7 GB      | Blurry textures, oversimplified geometry |
-| 128×128             | ~10 GB     | Clear textures, crisp geometry  |
-| 256×256             | ~13 GB     | Excellent detail, slower convergence |
+### **Optimized Hyperparameters**
 
-#### Loss vs. Batch Size
-<img src="images/loss_vs_batch_size.png" alt="Loss vs Batch Size" width="500">
+#### 1. Optimized Hyperparameter Configuration:
 
----
+| Parameter            | Optimized Value   |
+|----------------------|-------------------|
+| Batch Size           | 256               |
+| Training Resolution  | 128×128           |
+| Rendering Resolution | 200×200           |
+| CLIP Guidance Weight | 10                |
+| Timestep Annealing   | Exponential Decay |
+| Iterations           | 6000              |
 
-## **Optimized Hyperparameters**
-| Parameter            | Optimized Value |
-|----------------------|-----------------|
-| Batch Size           | 256             |
-| Training Resolution  | 128×128         |
-| Rendering Resolution | 200×200         |
-| CLIP Guidance Weight | 10              |
+#### 2. Final Observations with Optimized Parameters:
+
+| Metric                        | Result                                      |
+|-------------------------------|---------------------------------------------|
+| GPU VRAM Usage                | ~11 GB                                     |
+| Training Time (per 1000 iterations) | ~20 minutes                                |
+| Final Loss                    | 0.2113                                     |
+| Output Quality                | Sharp textures, consistent geometry, minimal artifacts |
 
 ---
 
