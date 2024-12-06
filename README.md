@@ -41,12 +41,15 @@ This repository extends the original implementation with significant optimizatio
 
 ## **Team Members and Contributions**
 
-| Name                 | GitHub Username              | Contribution                                    |
-|----------------------|------------------------------|------------------------------------------------|
-| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Hyperparameter tuning, result validation, and overall framework optimization. |
-| **Shreyas Gupta**    | [@ShreyasG](#)              | NFC integration and debugging.                 |
-| **Niraj Patel**      | [@NirajP](#)                | LoRa communication system and testing.         |
-| **Atchyut Kumar**    | [@AtchyutK](#)              | UI enhancements, testing coordination, and documentation. |
+
+| Name              | GitHub Username                                | Contribution                                                                                   |
+|-------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Rohan Sharma**  | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Compatibility Testing, Hyperparameter Tuning, Code Optimization for Colab, and Result Validation. |
+| **Shailesh Chaudhary** | [@Sschaudhary6](#)                            | Documentation, Batch Testing.                                                                 |
+
+To verify individual contributions, refer to the `git log` in the repository.
+
+---
 
 To verify contributions, refer to the `git log` in the repository.
 
@@ -84,6 +87,44 @@ pip install -r requirements.txt
 ---
 
 ## **Experimental Results**
+
+Here's the revised **Experimental Results** section with the requested batch size and resolution tables included:
+
+---
+
+## **Experimental Results**
+
+### **CLIP Weight: Observations and Analysis**
+
+| CLIP Weight | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+|-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
+| 1           | ~9 GB           | ~20 minutes   | 0.2543     | Poor alignment: Textures lacked clarity, geometry was overly simplified, and output diverged.    |
+| **10**      | **~11 GB**      | **~22 minutes** | **0.2113** | **Balanced alignment**: Textures were sharper, geometry was stable, closely resembling input.    |
+| 20          | ~13 GB          | ~22.5 minutes | 0.2198     | Over-sharpening: Textures became overly detailed, leading to artifacts, and geometry inconsistencies. |
+
+---
+
+### **Batch Size: Observations and Analysis**
+
+| Batch Size | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+|------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
+| 128        | ~8 GB           | ~18 minutes   | 0.2289     | Moderate texture clarity; geometry slightly inconsistent.                                        |
+| **256**    | **~11 GB**      | **~20 minutes** | **0.2113** | **Sharp textures**; stable geometry with minimal artifacts.                                      |
+| 512        | ~14 GB          | ~24 minutes   | 0.2034     | Slight overfitting observed; geometry became overly detailed.                                    |
+
+---
+
+### **Resolution: Observations and Analysis**
+
+| Resolution  | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+|-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
+| 64×64       | ~6 GB           | ~15 minutes   | 0.2634     | Low-resolution outputs; textures were blurry, geometry was overly simplified.                   |
+| **128×128** | **~11 GB**      | **~20 minutes** | **0.2113** | **Balanced quality**: Textures were sharp, geometry was consistent.                             |
+| 256×256     | ~18 GB          | ~35 minutes   | 0.1987     | Excellent texture clarity but required significantly more resources and time.                   |
+
+---
+
+These additional tables provide insights into how batch size and resolution influence the results, helping users understand the trade-offs between resource usage and output quality. Let me know if you'd like further refinements!
 
 ### **Training Efficiency**
 
@@ -136,11 +177,11 @@ These links will allow users to download or play the videos directly (if support
 ## **Google Colab Links**
 
 Here are some pre-configured notebooks for quick experimentation:
-1. [Quick Start with Default Parameters](#)
-2. [Advanced Reconstruction](#)
-3. [Resolution vs. Quality Testing](#)
-4. [CLIP Weight Optimization](#)
-5. [Multi-Object Batch Processing](#)
+1. [Quick Start with Default Parameters](https://colab.research.google.com/drive/1XOeBMM1XTd5MWy1ay2tU1QVk8WNz3RQo)
+2. [Advanced Reconstruction](https://colab.research.google.com/drive/1qE2Dwwxs7RbZmfuufZqfe_NyfRP_ri4P)
+3. [Boostmonoculardepth_npy](https://colab.research.google.com/drive/15YCsqaO6l94HueVwPQgHqVVDUJzdOEO5)
+4. [stable-dreamfusion](https://colab.research.google.com/drive/1ncs4m7Of2ltE-EpwqBiCZzbYUp1V2yNL)
+*Note:- All huper parameter tuning was done by just changing the parameneters in Cabin.yaml dynamically and was re-ran after each and all results are available in /images for refernce
 
 ---
 
@@ -157,5 +198,3 @@ Here are some pre-configured notebooks for quick experimentation:
 4. [NVIDIA T4 GPU Architecture](https://www.nvidia.com/en-us/data-center/tesla-t4/)
 
 ---
-
-This README separates the workflow into its own section and maintains clarity by emphasizing key outputs and configurations with better organization.
