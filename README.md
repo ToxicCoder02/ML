@@ -1,4 +1,3 @@
----
 
 # **NeuralLift-360: Single-Image 3D Reconstruction**
 
@@ -14,142 +13,144 @@
 5. [Installation](#installation)
 6. [Usage Guide](#usage-guide)
 7. [Experimental Results](#experimental-results)
-   - [RGB and Depth Visualizations](#rgb-and-depth-visualizations)
-   - [Batch Size Analysis](#batch-size-analysis)
-   - [Resolution Analysis](#resolution-analysis)
-8. [Graphs](#graphs)
-9. [Google Colab Links](#google-colab-links)
-10. [Acknowledgments and References](#acknowledgments-and-references)
+8. [Visual Outputs](#visual-outputs)
+9. [Optimized Hyperparameters](#optimized-hyperparameters)
+10. [Google Colab Links](#google-colab-links)
+11. [Acknowledgments and References](#acknowledgments-and-references)
 
 ---
 
 ## **Introduction**
 
-NeuralLift-360 is a cutting-edge neural rendering framework designed to generate realistic 3D objects from single 2D images. This repository is a fork of the [original NeuralLift-360 implementation by VITA-Group](https://github.com/VITA-Group/NeuralLift-360), extended with significant enhancements for:
-- Resource optimization on T4 GPUs.
-- Improved reconstruction fidelity.
-- Systematic hyperparameter tuning.
+NeuralLift-360 is a state-of-the-art neural rendering framework designed to generate photorealistic 3D objects from single 2D images. By integrating advanced methodologies like CLIP embeddings and Neural Radiance Fields (NeRF), the framework reconstructs unseen textures and geometry with exceptional accuracy. 
 
-Our contributions include detailed analyses of performance trade-offs, RGB and depth visualizations, and a summary of various experiments conducted.
+This repository extends the original implementation with significant optimizations for hardware constraints, systematic hyperparameter tuning, and performance analysis.
 
 ---
 
 ## **Core Features**
-- **Realistic 3D Outputs**: Generates 3D objects with photorealistic textures and consistent geometry.
-- **Optimized for Resource Constraints**: Adapted to T4 GPUs with 15GB VRAM.
-- **Customizability**: Fine-tuned parameters for batch size, resolution, and rendering settings.
-- **Ease of Use**: Modular design for seamless integration into existing workflows.
+- **Photorealistic Textures**: Reconstructs textures with high fidelity using CLIP-guided models.
+- **Geometry Consistency**: Maintains 3D object structural coherence across all angles.
+- **Efficiency**: Adapted for Google Colab and T4 GPUs (15GB VRAM).
+- **Customizability**: Parameter tuning for batch size, resolution, and training stability.
 
 ---
 
 ## **Team Members and Contributions**
 
-| Name              | GitHub Username                                | Contribution                                                                                   |
-|-------------------|------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| **Rohan Patil**  | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Compatibility Testing, Hyperparameter Tuning, Code Optimization for Colab, and Result Validation. |
-| **Shailesh Chaudhary** | [@Sschaudhary6](#)                            | Documentation, Batch Testing.                                                                 |
+| Name                 | GitHub Username              | Contribution                                    |
+|----------------------|------------------------------|------------------------------------------------|
+| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Hyperparameter tuning, result validation, and overall framework optimization. |
+| **Shreyas Gupta**    | [@ShreyasG](#)              | NFC integration and debugging.                 |
+| **Niraj Patel**      | [@NirajP](#)                | LoRa communication system and testing.         |
+| **Atchyut Kumar**    | [@AtchyutK](#)              | UI enhancements, testing coordination, and documentation. |
 
-To verify individual contributions, refer to the `git log` in the repository.
+To verify contributions, refer to the `git log` in the repository.
 
 ---
 
 ## **Methodology**
 
-1. **Fork and Extend the Original Code**:
-   - Base Code: Forked from [VITA-Group/NeuralLift-360](https://github.com/VITA-Group/NeuralLift-360).
-   - Repository Link: [ToxicCoder02/ML-Project](https://github.com/ToxicCoder02/ML-Project).
+1. **Forked Base Code**: 
+   - Original Repository: [VITA-Group/NeuralLift-360](https://github.com/VITA-Group/NeuralLift-360)
+   - Fork: [ToxicCoder02/ML-Project](https://github.com/ToxicCoder02/ML-Project)
 
-2. **Enhancements Made**:
-   - Adjusted batch size, resolution, and CLIP guidance weights for computational efficiency.
-   - Integrated dynamic VRAM usage monitoring to prevent overflows.
-   - Fine-tuned depth estimation algorithms and diffusion model parameters.
-
-3. **Version Control**:
-   - All changes have been tracked in this repository. Use the `git log` command to view detailed commit histories.
+2. **Enhancements**:
+   - Optimized batch size, resolution, and CLIP weights for constrained hardware.
+   - Integrated VRAM usage monitoring to prevent overflows.
+   - Fine-tuned depth and diffusion parameters for better textures and geometry.
 
 ---
 
 ## **Installation**
 
-Fork or clone this repository:
+Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/ToxicCoder02/ML-Project.git
 cd ML-Project
 pip install -r requirements.txt
 ```
 
-To view the original code, visit [NeuralLift-360 by VITA-Group](https://github.com/VITA-Group/NeuralLift-360).
-
 ---
 
 ## **Usage Guide**
 
-1. **Prepare Input**: Add your 2D image to the `inputs/` folder.
+1. **Prepare Input**: Place your 2D image in the `inputs/` folder.
 2. **Run the Pipeline**:
    ```bash
    python main.py --input inputs/sample.jpg --output outputs/
    ```
-3. **Customize Parameters**:
-   - Modify `config.yaml` to change hyperparameters such as batch size, resolution, and CLIP weights.
-4. **View Outputs**: Results are saved in the `outputs/` folder, including RGB and depth maps.
+3. **Adjust Parameters**: Edit `config.yaml` for batch size, resolution, and CLIP weights.
+4. **Output Files**: Results will be saved in the `outputs/` directory.
 
 ---
 
 ## **Experimental Results**
 
-### **RGB and Depth Visualizations**
+### **Training Efficiency**
 
-For different configurations, the output includes:
-- RGB reconstruction (`lift_epXXXX_rgb.mp4`)
-- Depth visualization (`lift_epXXXX_depth.mp4`)
-
-#### Sample Outputs:
-- `lift_ep0010_rgb (1)_64.mp4` – Low resolution, small batch size.
-- `lift_ep0010_depth (2)_512.mp4` – High resolution, larger batch size.
-
----
-
-### **Batch Size Analysis**
-
-| Batch Size | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
-|------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
-| 128        | ~8 GB           | ~18 minutes   | 0.2289     | Moderate texture clarity; geometry slightly inconsistent.                                        |
-| **256**    | **~11 GB**      | **~20 minutes** | **0.2113** | **Sharp textures**; stable geometry with minimal artifacts.                                      |
-| 512        | ~14 GB          | ~24 minutes   | 0.2034     | Slight overfitting observed; geometry became overly detailed.                                    |
-
----
-
-### **Resolution Analysis**
-
-| Resolution  | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
+#### **CLIP Weight Observations**
+| CLIP Weight | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
 |-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
-| 64×64       | ~6 GB           | ~15 minutes   | 0.2634     | Low-resolution outputs; textures were blurry, geometry was overly simplified.                   |
-| **128×128** | **~11 GB**      | **~20 minutes** | **0.2113** | **Balanced quality**: Textures were sharp, geometry was consistent.                             |
-| 256×256     | ~18 GB          | ~35 minutes   | 0.1987     | Excellent texture clarity but required significantly more resources and time.                   |
+| 1           | ~9 GB           | ~20 minutes   | 0.2543     | Poor alignment: Textures lacked clarity, geometry was overly simplified, and output diverged.    |
+| **10**      | **~11 GB**      | **~22 minutes** | **0.2113** | **Balanced alignment**: Textures were sharper, geometry was stable, closely resembling input.    |
+| 20          | ~13 GB          | ~22.5 minutes | 0.2198     | Over-sharpening: Textures became overly detailed, leading to artifacts, and geometry inconsistencies. |
+
+#### **Optimized Parameters**
+| Parameter            | Value             |
+|----------------------|-------------------|
+| Batch Size           | 256               |
+| Training Resolution  | 128×128           |
+| Rendering Resolution | 200×200           |
+| CLIP Guidance Weight | 10                |
+| Timestep Annealing   | Exponential Decay |
+| Iterations           | 6000              |
 
 ---
 
-## **Graphs**
+## **Visual Outputs**
 
-- **Graph-1**: Training Time vs. Batch Size  
-  Illustrates the relationship between batch size and time taken for 1000 iterations.
+### **Graphs**
+#### Training Loss vs. Batch Size
+<img src="/images/graph-1.png" alt="Training Loss vs Batch Size" width="600">
 
-- **Graph-2**: Final Loss vs. Resolution  
-  Demonstrates the impact of resolution on loss reduction and output quality.
+#### GPU Usage vs. Training Resolution
+<img src="/images/graph-2.png" alt="GPU Usage vs Training Resolution" width="600">
 
-- **Graph-3**: GPU VRAM Usage Comparison  
-  Provides insights into GPU memory utilization for various configurations.
+#### CLIP Weight vs. Output Quality
+<img src="/images/graph-3.png" alt="CLIP Weight vs Output Quality" width="600">
+
+---
+
+### **Reconstructed 3D Outputs**
+
+#### **Example: Single Image to RGB 360° View**
+- Input Image:
+  <img src="/images/Workflow.png" alt="Input Image Example" width="300">
+
+- Reconstructed RGB 360° View:
+  <video src="/images/lift_ep0010_rgb.mp4" controls width="600"></video>
+
+- Depth 360° View:
+  <video src="/images/lift_ep0010_depth.mp4" controls width="600"></video>
+
+#### **Comparative Outputs with Resolutions**
+| Training Resolution | RGB Output                                      | Depth Output                                      |
+|----------------------|------------------------------------------------|--------------------------------------------------|
+| 32×32               | <video src="/images/lift_ep0010_rgb (2)_32.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_32.mp4" controls width="300"></video> |
+| 128×128             | <video src="/images/lift_ep0010_rgb (2)_128.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_128.mp4" controls width="300"></video> |
+| 256×256             | <video src="/images/lift_ep0010_rgb (2)_256.mp4" controls width="300"></video> | <video src="/images/lift_ep0010_depth (2)_256.mp4" controls width="300"></video> |
 
 ---
 
 ## **Google Colab Links**
 
-Explore the pre-configured notebooks for experimentation:
-1. [Quick Start Notebook](#)
+Here are some pre-configured notebooks for quick experimentation:
+1. [Quick Start with Default Parameters](#)
 2. [Advanced Reconstruction](#)
-3. [Hyperparameter Tuning](#)
-4. [Multi-Object Processing](#)
-5. [Visualization and Testing](#)
+3. [Resolution vs. Quality Testing](#)
+4. [CLIP Weight Optimization](#)
+5. [Multi-Object Batch Processing](#)
 
 ---
 
@@ -157,7 +158,7 @@ Explore the pre-configured notebooks for experimentation:
 
 ### **Acknowledgments**
 - Original framework by [VITA-Group](https://github.com/VITA-Group/NeuralLift-360).
-- GPU resources provided by Google Colab.
+- GPU resources and development environment provided by Google Colab.
 
 ### **References**
 1. [NeuralLift-360: GitHub Repository](https://github.com/VITA-Group/NeuralLift-360)
