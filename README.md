@@ -14,7 +14,10 @@
 5. [Installation](#installation)
 6. [Usage Guide](#usage-guide)
 7. [Experimental Results](#experimental-results)
-8. [Optimized Hyperparameters](#optimized-hyperparameters)
+   - [RGB and Depth Visualizations](#rgb-and-depth-visualizations)
+   - [Batch Size Analysis](#batch-size-analysis)
+   - [Resolution Analysis](#resolution-analysis)
+8. [Graphs](#graphs)
 9. [Google Colab Links](#google-colab-links)
 10. [Acknowledgments and References](#acknowledgments-and-references)
 
@@ -27,7 +30,7 @@ NeuralLift-360 is a cutting-edge neural rendering framework designed to generate
 - Improved reconstruction fidelity.
 - Systematic hyperparameter tuning.
 
-Our contributions also include a detailed analysis of performance trade-offs, enabling efficient deployment in constrained environments.
+Our contributions include detailed analyses of performance trade-offs, RGB and depth visualizations, and a summary of various experiments conducted.
 
 ---
 
@@ -47,6 +50,7 @@ Our contributions also include a detailed analysis of performance trade-offs, en
 | **Shailesh Chaudhary** | [@Sschaudhary6](#)                            | Documentation, Batch Testing.                                                                 |
 
 To verify individual contributions, refer to the `git log` in the repository.
+
 ---
 
 ## **Methodology**
@@ -56,9 +60,9 @@ To verify individual contributions, refer to the `git log` in the repository.
    - Repository Link: [ToxicCoder02/ML-Project](https://github.com/ToxicCoder02/ML-Project).
 
 2. **Enhancements Made**:
-   - Adjusted **batch size**, **resolution**, and **CLIP guidance weights** for computational efficiency.
+   - Adjusted batch size, resolution, and CLIP guidance weights for computational efficiency.
    - Integrated dynamic VRAM usage monitoring to prevent overflows.
-   - Fine-tuned **depth estimation algorithms** and **diffusion model parameters**.
+   - Fine-tuned depth estimation algorithms and diffusion model parameters.
 
 3. **Version Control**:
    - All changes have been tracked in this repository. Use the `git log` command to view detailed commit histories.
@@ -93,17 +97,19 @@ To view the original code, visit [NeuralLift-360 by VITA-Group](https://github.c
 
 ## **Experimental Results**
 
-### **CLIP Weight: Observations and Analysis**
+### **RGB and Depth Visualizations**
 
-| CLIP Weight | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
-|-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
-| 1           | ~9 GB           | ~20 minutes   | 0.2543     | Poor alignment: Textures lacked clarity, geometry was overly simplified, and output diverged.    |
-| **10**      | **~11 GB**      | **~22 minutes** | **0.2113** | **Balanced alignment**: Textures were sharper, geometry was stable, closely resembling input.    |
-| 20          | ~13 GB          | ~22.5 minutes | 0.2198     | Over-sharpening: Textures became overly detailed, leading to artifacts, and geometry inconsistencies. |
+For different configurations, the output includes:
+- RGB reconstruction (`lift_epXXXX_rgb.mp4`)
+- Depth visualization (`lift_epXXXX_depth.mp4`)
+
+#### Sample Outputs:
+- `lift_ep0010_rgb (1)_64.mp4` – Low resolution, small batch size.
+- `lift_ep0010_depth (2)_512.mp4` – High resolution, larger batch size.
 
 ---
 
-### **Batch Size: Observations and Analysis**
+### **Batch Size Analysis**
 
 | Batch Size | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
 |------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
@@ -113,7 +119,7 @@ To view the original code, visit [NeuralLift-360 by VITA-Group](https://github.c
 
 ---
 
-### **Resolution: Observations and Analysis**
+### **Resolution Analysis**
 
 | Resolution  | GPU VRAM Usage | Training Time | Final Loss | Output Quality                                                                                     |
 |-------------|-----------------|---------------|------------|---------------------------------------------------------------------------------------------------|
@@ -123,27 +129,16 @@ To view the original code, visit [NeuralLift-360 by VITA-Group](https://github.c
 
 ---
 
-### **Optimized Hyperparameters**
+## **Graphs**
 
-#### 1. Optimized Hyperparameter Configuration:
+- **Graph-1**: Training Time vs. Batch Size  
+  Illustrates the relationship between batch size and time taken for 1000 iterations.
 
-| Parameter            | Optimized Value   |
-|----------------------|-------------------|
-| Batch Size           | 256               |
-| Training Resolution  | 128×128           |
-| Rendering Resolution | 200×200           |
-| CLIP Guidance Weight | 10                |
-| Timestep Annealing   | Exponential Decay |
-| Iterations           | 6000              |
+- **Graph-2**: Final Loss vs. Resolution  
+  Demonstrates the impact of resolution on loss reduction and output quality.
 
-#### 2. Final Observations with Optimized Parameters:
-
-| Metric                        | Result                                      |
-|-------------------------------|---------------------------------------------|
-| GPU VRAM Usage                | ~11 GB                                     |
-| Training Time (per 1000 iterations) | ~20 minutes                                |
-| Final Loss                    | 0.2113                                     |
-| Output Quality                | Sharp textures, consistent geometry, minimal artifacts |
+- **Graph-3**: GPU VRAM Usage Comparison  
+  Provides insights into GPU memory utilization for various configurations.
 
 ---
 
