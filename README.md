@@ -1,132 +1,111 @@
-# NeuralLift-360: Elevating 2D Images to Immersive 3D Models with Full 360° Views
+### GitHub README for NeuralLift-360
 
-## Overview
+# NeuralLift-360: Single Image to 3D Reconstruction
 
-NeuralLift-360 provides an innovative approach for transforming standard 2D images into fully navigable 3D models with 360° views. This project leverages depth estimation and neural rendering techniques, allowing creators to build high-fidelity 3D objects from photos captured in unconstrained environments.
+NeuralLift-360 is a state-of-the-art framework that transforms a single 2D image into a 3D object with 360° views, leveraging advanced neural rendering techniques. This project is optimized for resource-constrained environments and focuses on balancing computational efficiency, output fidelity, and stability.
 
-### Quick Links
-- **[Paper](https://arxiv.org/abs/2211.16431)**
-- **[Project Website](https://vita-group.github.io/NeuralLift-360/)**
+---
 
-### Recent Updates
-- **March 12, 2023**: Initial workflow and Gradio application have been released, enabling users to explore and experiment with the tool through a user-friendly interface.
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Installation](#installation)
+4. [Usage](#usage)
+5. [Results](#results)
+6. [Optimized Hyperparameters](#optimized-hyperparameters)
+7. [Google Colab Links](#google-colab-links)
+8. [Acknowledgments](#acknowledgments)
 
-## Pipeline Overview
+---
 
-NeuralLift-360 uses a multi-step pipeline to create realistic 3D representations from 2D photos. Below is a high-level breakdown of the process:
+## Introduction
+NeuralLift-360 addresses the challenge of reconstructing a 3D model from a single 2D image, a problem critical for applications in:
+- Virtual and Augmented Reality
+- 3D Content Creation
+- Gaming
+- Automated Design
 
-1. **Depth Estimation**: Integrates the output from robust depth estimation models.
-2. **Foreground Segmentation**: Isolates the primary object for accurate modeling.
-3. **3D Reconstruction**: Leverages neural rendering to create a 3D model with full 360° views.
-4. **Refinement and Training**: Uses specialized techniques to optimize the quality of the 3D model.
+By integrating **Contrastive Language–Image Pretraining (CLIP)** and **Neural Radiance Fields (NeRF)**, NeuralLift-360 provides realistic texture and geometry reconstruction with efficient resource utilization.
 
-![NeuralLift-360 Pipeline](./docs/static/media/framework-crop-1.b843bf7d1c3c29c01fb2.jpg)
+---
 
-## Setting Up Your Environment
+## Features
+- Converts a single 2D image to a fully rendered 3D model.
+- High-fidelity textures and geometry with minimal artifacts.
+- Optimized for Google Colab and T4 GPUs.
+- Customizable hyperparameters for performance tuning.
+- Supports batch processing and scalable configurations.
 
-Install all the required dependencies with a single command:
+---
 
+## Installation
+Clone the repository and install dependencies:
 ```bash
+git clone https://github.com/your-repo/NeuralLift-360.git
+cd NeuralLift-360
 pip install -r requirements.txt
 ```
 
-For users interested in running the interactive application, install Gradio separately:
+---
 
-```bash
-pip install gradio
-```
+## Usage
+1. Prepare your input image and place it in the `inputs/` directory.
+2. Run the main script to start the 3D reconstruction:
+   ```bash
+   python main.py --input inputs/sample.jpg --output outputs/
+   ```
 
-### Gradio Application
+For advanced users, configure parameters in `config.yaml` to customize the pipeline.
 
-To run the interactive Gradio App for testing your 3D transformations:
+---
 
-```bash
-python gradio_app.py
-# Use `--share` to create a public link
-```
+## Results
+Below are the visual results obtained from NeuralLift-360:
 
-**Note**: The current version loads configurations from pre-defined YAML files. The app is slower than the direct training script as it includes rendering during training.
+### Reconstructed Outputs
+#### Input Image
+<img src="images/input_image.jpg" alt="Input Image" width="300">
 
-## Preparing Your Data
+#### RGB 360° View
+<img src="images/rgb_360.gif" alt="RGB 360° View" width="500">
 
-**Depth Estimation**: NeuralLift-360 requires accurate depth maps to build convincing 3D models. We recommend using [Boost Your Own Depth](https://github.com/compphoto/BoostingMonocularDepth) alongside [LeRes](https://github.com/aim-uofa/AdelaiDepth/tree/main/LeReS) for robust depth estimation.
+#### Depth 360° View
+<img src="images/depth_360.gif" alt="Depth 360° View" width="500">
 
-- Export depth maps in NumPy format using this [Google Colab Notebook](https://colab.research.google.com/drive/15YCsqaO6l94HueVwPQgHqVVDUJzdOEO5?usp=sharing).
+### Loss vs Batch Size
+<img src="images/loss_vs_batch_size.png" alt="Loss vs Batch Size" width="500">
 
-**Foreground Masking**: To extract the main object from its background, use the [image-background-remove-tool](https://github.com/Ir1d/image-background-remove-tool).
+### GPU Usage vs Training Resolution
+<img src="images/gpu_usage_resolution.png" alt="GPU Usage vs Resolution" width="500">
 
-## Training Your Model
+---
 
-Configurations for training are provided in YAML format within the `configs` directory. To start training:
+## Optimized Hyperparameters
+| Parameter              | Value         |
+|------------------------|---------------|
+| Batch Size             | 256           |
+| Training Resolution    | 128×128       |
+| Rendering Resolution   | 200×200       |
+| CLIP Guidance Weight   | 10            |
+| Timestep Annealing     | Exponential   |
+| Training Iterations    | 6000          |
 
-```bash
-python main.py --config configs/cabin.yaml
-```
+---
 
-### Optional: Textual Inversion for Enhanced Embeddings
+## Google Colab Links
+Here are some Colab notebooks to get started:
+1. [Basic Setup](#)
+2. [Custom Hyperparameter Tuning](#)
+3. [High-Resolution Rendering](#)
+4. [Batch Processing](#)
+5. [Advanced Experiments](#)
 
-To improve text embeddings, you can run text inversion. This step provides a more context-aware model for generating 3D objects:
+---
 
-```bash
-export MODEL_NAME="runwayml/stable-diffusion-v1-5"
-accelerate launch text_inversion.py \
-  --pretrained_model_name_or_path=$MODEL_NAME \
-  --learnable_property="object" \
-  --placeholder_token="<cabin>" --initializer_token="cabin" \
-  --resolution=512 \
-  --train_batch_size=1 \
-  --gradient_accumulation_steps=4 \
-  --max_train_steps=1000 \
-  --learning_rate=5.0e-04 --scale_lr \
-  --lr_scheduler="constant" \
-  --lr_warmup_steps=0 \
-  --output_dir="cabin_ti" \
-  --im_path='data/cabin4_centered.png' \
-  --mask_path='data/cabin4_centered_mask.png'
-```
+## Acknowledgments
+This implementation is based on:
+- NeuralLift-360 by [VITA-Group](https://github.com/VITA-Group/NeuralLift-360).
+- NVIDIA T4 GPU architecture for computational support.
+- Contributions by [Rohan Patil](mailto:rpatil4@binghamton.edu) and [Shailesh Chaudhary](mailto:rpatil4@binghamton.edu).
 
-After training, validate the performance using `test_dm.py`. Configuration for textual inversion can be found in `configs/cabin_ti.yaml`. To train using these settings:
-
-```bash
-python main.py --config configs/cabin_ti.yaml
-```
-
-### Future Features: Imagic Fine-tuning
-
-We are working on implementing advanced fine-tuning methods, such as Imagic, to further enhance the generated 3D models. Stay tuned for upcoming updates!
-
-## Testing and Output
-
-Once training is complete, the code automatically generates a video named `lift_ep0100_rgb.mp4` showcasing the 360° view of the 3D object. To locate these videos in your project directory:
-
-```bash
-find ./ -name lift_ep0100_rgb.mp4 -printf "%T@ %Tc %p\n" | sort -n
-```
-
-### Running Tests Only
-
-To run tests without additional training, modify your YAML configuration:
-
-- Set `test: False` to `test: True`.
-- Update the `ckpt` path to your trained checkpoint.
-
-## Acknowledgements
-
-NeuralLift-360 is built upon the foundations laid by [Stable DreamFusion](https://github.com/ashawkey/stable-dreamfusion). Special thanks to [Jiaxiang Tang](https://me.kiui.moe/) for invaluable discussions and insights that contributed to this project.
-
-## Citing NeuralLift-360
-
-If you use NeuralLift-360 in your research or projects, please consider citing:
-
-```
-@InProceedings{Xu_2022_neuralLift,
-author = {Xu, Dejia and Jiang, Yifan and Wang, Peihao and Fan, Zhiwen and Wang, Yi and Wang, Zhangyang},
-title = {NeuralLift-360: Lifting An In-the-wild 2D Photo to A 3D Object with 360° Views},
-journal={arXiv preprint arXiv:2211.16431},
-year={2022}
-}
-```
-
-## Future Work and Roadmap
-
-We are committed to enhancing NeuralLift-360 with additional features, improved performance, and user-friendly tutorials. Follow the [project website](https://vita-group.github.io/NeuralLift-360/) for the latest updates and resources.
+For more details, check the [original paper](https://arxiv.org/abs/2211.16431) or visit the [project page](https://vita-group.github.io/NeuralLift-360/).
