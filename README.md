@@ -1,5 +1,3 @@
-Here’s your updated README file with your repository link integrated:
-
 ---
 
 # **NeuralLift-360: Single-Image 3D Reconstruction**
@@ -45,10 +43,8 @@ Our contributions also include a detailed analysis of performance trade-offs, en
 
 | Name                 | GitHub Username              | Contribution                                    |
 |----------------------|------------------------------|------------------------------------------------|
-| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Hyperparameter tuning, code optimization for Colab, and result validation. |
-| **Shreyas Gupta**    | [@ShreyasG](#)              | NFC integration, pipeline debugging, and initial setup configuration. |
-| **Niraj Patel**      | [@NirajP](#)                | LoRa communication system integration, testing, and alert system development. |
-| **Atchyut Kumar**    | [@AtchyutK](#)              | User interface enhancements, testing coordination, and documentation. |
+| **Aryan Sharma**     | [@ToxicCoder02](https://github.com/ToxicCoder02) | Project Lead: Comapatibliliy Testing ,Hyperparameter tuning, code optimization for Colab, and result validation. |
+| **Sgailesh Chaudhary**    | [@Sschaudhary6](#)              | Documentation,Batch Tesing |
 
 To verify individual contributions, refer to the `git log` in the repository.
 
@@ -157,5 +153,3 @@ Explore the pre-configured notebooks for experimentation:
 4. [NVIDIA T4 GPU Architecture](https://www.nvidia.com/en-us/data-center/tesla-t4/)
 
 ---
-
-This README ensures compliance with your professor's requirements and includes all necessary links, contributions, and improvements.
