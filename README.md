@@ -1,5 +1,3 @@
-Here’s an updated version of the README with the workflow shown separately, ensuring clarity and better visibility:
-
 ---
 
 # **NeuralLift-360: Single-Image 3D Reconstruction**
@@ -51,10 +49,6 @@ To verify individual contributions, refer to the `git log` in the repository.
 
 ---
 
-To verify contributions, refer to the `git log` in the repository.
-
----
-
 ## **Workflow**
 
 The following diagram illustrates the complete pipeline for generating 3D reconstructions from a single 2D image using NeuralLift-360:
@@ -87,8 +81,6 @@ pip install -r requirements.txt
 ---
 
 ## **Experimental Results**
-
-Here's the revised **Experimental Results** section with the requested batch size and resolution tables included:
 
 ---
 
@@ -123,8 +115,6 @@ Here's the revised **Experimental Results** section with the requested batch siz
 | 256×256     | ~18 GB          | ~35 minutes   | 0.1987     | Excellent texture clarity but required significantly more resources and time.                   |
 
 ---
-
-These additional tables provide insights into how batch size and resolution influence the results, helping users understand the trade-offs between resource usage and output quality. Let me know if you'd like further refinements!
 
 ### **Training Efficiency**
 
@@ -181,6 +171,8 @@ Here are some pre-configured notebooks for quick experimentation:
 2. [Advanced Reconstruction](https://colab.research.google.com/drive/1qE2Dwwxs7RbZmfuufZqfe_NyfRP_ri4P)
 3. [Boostmonoculardepth_npy](https://colab.research.google.com/drive/15YCsqaO6l94HueVwPQgHqVVDUJzdOEO5)
 4. [stable-dreamfusion](https://colab.research.google.com/drive/1ncs4m7Of2ltE-EpwqBiCZzbYUp1V2yNL)
+---
+
 -*Note:- All huper parameter tuning was done by just changing the parameneters in Cabin.yaml dynamically and was re-ran after each and all results are available in /images for refernce
 
 ---
